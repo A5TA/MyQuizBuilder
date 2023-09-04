@@ -6,45 +6,32 @@ load_dotenv()
 
 app = Flask(__name__)
 
+openai.api_key = os.getenv("CHAT_GPT_API_KEY")
+
 @app.route("/")
 def hello_world():  
     return "<p>Hello, World!</p>"
 
+
 @app.route("/getAnswers")
-def hello_world2():
-    return generate_wrong_answers("What are the 4 benefits of OOP?", "Encapsulation, Inheritance, PolyMorphism, and Abstraction")
+def get_answers():
     
+    
+    # question = "What are the 4 benefits of OOP?"
+    correct_answer = "Encapsulation, Inheritance, Polymorphism, and Abstraction"
+    inputed_answer = "Inheritance, Encapsulation, abstraction, and lol"
+    prompt = (
+        f"You are a 'high', or 'low' answering computer that grades on similarity not exact accuracy"
+        f"Compare the similarity between the correct answer: '{correct_answer}' "
+        f"and the provided answer to grade: '{inputed_answer}'."
+        f"Response must be either 'high' or 'low' so NO other text"
+    )
+    
+    response = grade_answer(prompt)
 
+    return response
 
-
-#This is the functions that returns all the incorrect choices for the provided input
-def generate_wrong_answers(question, correct_answer):
-    # Generate three wrong answers to this array that is returned 
-    wrong_answers = []
-
-    for i in range(3):
-        usedAnswers = ""
-        for j in range(len(wrong_answers)):       
-            if j == len(wrong_answers) - 1:
-                usedAnswers = wrong_answers[j] + ""
-            else:
-                usedAnswers = wrong_answers[j] + ", "
-        
-        if len(wrong_answers) > 0:
-            response = openai.Completion.create(
-            engine="text-davinci-002",
-            prompt=f"Create a wrong answer for the question: '{question}' given that we already have the wrong answers as '{usedAnswers}'\nCorrect Answer: {correct_answer}\nWrong Answer:",
-            max_tokens=50,
-            api_key=os.getenv("CHAT_GPT_API_KEY"),
-        ) 
-        else:
-            response = openai.Completion.create(
-                engine="text-davinci-002",
-                prompt=f"Create a wrong answer for the question: '{question}'\nCorrect Answer: {correct_answer}\nWrong Answer:",
-                max_tokens=50,
-                api_key=os.getenv("CHAT_GPT_API_KEY"),
-            )
-        wrong_answer = response.choices[0].text.strip()
-        wrong_answers.append(wrong_answer)
-
-    return wrong_answers
+def grade_answer(prompt):
+    response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}])
+    
+    return response.choices[0].message.content
