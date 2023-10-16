@@ -1,16 +1,71 @@
-from flask import Flask
+from flask import Flask, jsonify, request
 import openai
 from dotenv import load_dotenv
 import os
+import sqlite3
 load_dotenv()
 
 app = Flask(__name__)
 
+
+connect = sqlite3.connect('database.db', check_same_thread=False) 
+connect.execute('CREATE TABLE IF NOT EXISTS QUIZ (id INTEGER PRIMARY KEY, name TEXT, length INTEGER, qna TEXT)') 
+print("Table created and connected!")
+connect.close()
 openai.api_key = os.getenv("CHAT_GPT_API_KEY")
 
 @app.route("/")
 def hello_world():  
     return "<p>Hello, World!</p>"
+
+@app.route('/createKey',methods = ['POST'])
+def create_key():
+   if request.method == 'POST':
+        connect = sqlite3.connect('database.db', check_same_thread=False) 
+        try:
+            request_data = request.get_json() #Get the Json of the data sent to the flask server
+            
+            name = request_data['name'] #Name of the quiz provided by the user
+            length = request_data['length'] #Amount of questions total
+            qna = request_data['qna']  # Questions and answers
+            
+            app.logger.info("Received request with name: %s, length: %s, city: %s", name, length, qna)
+            # Use the 'connect' variable to execute the INSERT
+            cur = connect.cursor()
+            cur.execute("INSERT INTO QUIZ (name, length, qna) VALUES (?,?,?)", (name, length, qna))
+
+            # Get the ID of the newly inserted record
+            inserted_id = cur.lastrowid
+
+            connect.commit()
+            msg = "Quiz successfully added to the database with ID: {}".format(inserted_id)
+        except Exception as e:
+            msg = "Error in the INSERT: {}".format(e)
+            connect.close()
+            return jsonify({"message": msg})
+
+        # Send message after inserting
+        print("Finished inserting")
+        connect.close()
+        return jsonify({"message": msg, "id": inserted_id})
+    
+@app.route('/getKey/<key>',methods = ['GET'])
+def get_key(key): 
+    if request.method == 'GET':
+        connect = sqlite3.connect('database.db', check_same_thread=False) 
+        connect.row_factory = sqlite3.Row
+        cur = connect.cursor()
+        cur.execute("SELECT rowid, * FROM QUIZ WHERE rowid = " + key)
+        data = cur.fetchone()  # Retrieve the row
+        
+        if data is not None:
+            row_dict = dict(data)  # Convert the row to a dictionary
+            connect.close()
+            return jsonify(row_dict)  # Return the data as JSON
+        else:
+            connect.close()
+            return jsonify({"message": "No quiz found for key: " + str(key)})
+
 
 
 @app.route("/getAnswers")
