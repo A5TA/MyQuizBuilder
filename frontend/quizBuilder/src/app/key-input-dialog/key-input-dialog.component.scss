@@ -1,0 +1,17 @@
+.custom-input {
+    width: 100%;
+    margin-bottom: 10px; /* Add some spacing between the input field and buttons */
+    position: relative; /* Position the close button relative to the input field */
+}
+  
+.dialog-btn {
+    float: right;
+    margin: 5px;
+    cursor: pointer;
+    // padding: 1rem;
+  }
+
+.dialog-container {
+    overflow: hidden;
+    padding: 0.5rem;
+}

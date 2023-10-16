@@ -1,0 +1,19 @@
+<div class="home-content">
+    <mat-card>
+        <img mat-card-image src="../../assets/QuizBuilderPNG.png" alt="QuizBuilder"/>
+        <mat-card-content>
+        <h3>Your Personal Quiz Creator and Grader!</h3>
+        <h4>{{description}}</h4>
+        <div class="action-container">
+            <p>Choose an action:</p>
+            <div class="button-container">
+                <button mat-raised-button color="primary" (click)="createKey()">Create Key</button>
+                <button mat-raised-button color="accent" (click)="enterKey()">Enter Key</button>
+            </div>
+        </div>
+        
+        </mat-card-content>
+    </mat-card>
+</div>
+
+

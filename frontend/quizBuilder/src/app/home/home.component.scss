@@ -1,0 +1,41 @@
+.button-container {
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+    gap: 2rem;
+}
+
+.action-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem;
+}
+  
+mat-card {
+    max-width: 1200px;
+    // min-width: 400px;
+    min-height: 500px;
+    margin: 0 auto;
+    padding: 16px;
+    // text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+.home-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Make the container take the full viewport height */
+}
+
+img {
+    width: 50%;
+    height: auto;
+}
