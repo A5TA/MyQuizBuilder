@@ -18,6 +18,9 @@ import { QuizpageComponent } from './quizpage/quizpage.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { KeyInputDialogComponent } from './key-input-dialog/key-input-dialog.component';
 
+//This is the Backend communication imports
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { KeyInputDialogComponent } from './key-input-dialog/key-input-dialog.com
     FormsModule,
     MatInputModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

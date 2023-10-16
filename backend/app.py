@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import openai
 from dotenv import load_dotenv
 import os
@@ -6,6 +7,7 @@ import sqlite3
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS so we can actually communicate with the frontend
 
 
 connect = sqlite3.connect('database.db', check_same_thread=False) 

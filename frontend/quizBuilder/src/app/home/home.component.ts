@@ -11,7 +11,7 @@ import { KeyInputDialogComponent } from '../key-input-dialog/key-input-dialog.co
 
 export class HomeComponent {
   description: string = `QuizBuilder is an application that empowers you to create your quizzes. You can input quiz questions and their answers, and our system will generate a unique ID for your quiz. This ID is like a key that you can share with your friends, fellow students, or colleagues. They can use this key to access your quiz, take the test, and receive grading by ChatGPT.`;
-  quizId: string | undefined;
+  quizId: number | undefined;
   constructor(private router: Router, public dialog: MatDialog) { }
 
   createKey() {

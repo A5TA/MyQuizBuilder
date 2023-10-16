@@ -12,7 +12,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 
 export class KeyInputDialogComponent {
-  quizId :string | undefined;
+  quizId :number | undefined;
 
   constructor(public dialogRef: MatDialogRef<KeyInputDialogComponent>) {}
 
