@@ -1,1 +1,23 @@
-<p>quizmaker works!</p>
+<form #quizForm="ngForm">
+    <mat-form-field>
+      <input matInput name="quizName" placeholder="Quiz Name" ngModel required>
+    </mat-form-field>
+  
+    <div *ngFor="let question of questions; let i = index" class="question-input">
+      <mat-form-field>
+        <input matInput name="question{{i + 1}}" placeholder="Question {{i + 1}}" [(ngModel)]="question.question" required>
+      </mat-form-field>
+      
+      <mat-form-field>
+        <input matInput name="answer{{i + 1}}" placeholder="Answer {{i + 1}}" [(ngModel)]="question.answer" required>
+      </mat-form-field>
+
+      <button mat-icon-button color="warn" (click)="deleteQuestion(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  
+    <button mat-raised-button color="primary" (click)="addQuestion()">Add Question</button>
+    
+    <button mat-raised-button color="primary" [disabled]="!validate()" (click)="createQuiz(quizForm.value)">Create Quiz</button>
+</form>

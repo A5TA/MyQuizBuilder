@@ -26,4 +26,6 @@ export class QuizpageComponent implements OnInit{
       }
     });
   }
+
+  
 }

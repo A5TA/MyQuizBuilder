@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import openai
+import json
 from dotenv import load_dotenv
 import os
 import sqlite3
@@ -26,10 +27,10 @@ def create_key():
         connect = sqlite3.connect('database.db', check_same_thread=False) 
         try:
             request_data = request.get_json() #Get the Json of the data sent to the flask server
-            
+            print(request_data)
             name = request_data['name'] #Name of the quiz provided by the user
             length = request_data['length'] #Amount of questions total
-            qna = request_data['qna']  # Questions and answers
+            qna = json.dumps(request_data['qna'])  # Questions and answers
             
             app.logger.info("Received request with name: %s, length: %s, city: %s", name, length, qna)
             # Use the 'connect' variable to execute the INSERT
@@ -61,9 +62,15 @@ def get_key(key):
         data = cur.fetchone()  # Retrieve the row
         
         if data is not None:
-            row_dict = dict(data)  # Convert the row to a dictionary
+            # Create a dict with the json structure
+            quiz_dict = {
+                "id": data["id"],
+                "name": data["name"],
+                "length": data["length"],
+                "qna": json.loads(data["qna"])  # Deserialize the json to object
+            }
             connect.close()
-            return jsonify(row_dict)  # Return the data as JSON
+            return jsonify(quiz_dict)  # Return the data as JSON
         else:
             connect.close()
             return jsonify({"message": "No quiz found for key: " + str(key)})
