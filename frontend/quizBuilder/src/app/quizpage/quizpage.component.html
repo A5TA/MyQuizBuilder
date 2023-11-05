@@ -1,1 +1,15 @@
-<p>{{quizData | json}}</p>
+<div class="quiz-container">
+    <h2>{{ quizData?.name}}</h2>
+    <div *ngFor="let qa of questionsAndAnswers; let i = index">
+      <mat-card class="question-card">
+        <mat-card-title>Question {{ i + 1 }}</mat-card-title>
+        <mat-card-content>
+          <p>{{ qa.question }}</p>
+          <mat-form-field class="answer-field">
+            <input matInput placeholder="Your Answer" [(ngModel)]="inputedAnswer[i]" name="answer {{ i + 1}}">
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <button mat-raised-button color="primary" (click)="submitQuiz()">Submit Quiz</button>
+</div>
