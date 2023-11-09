@@ -77,25 +77,37 @@ def get_key(key):
 
 
 
-@app.route("/getAnswers")
-def get_answers():
-    
-    
-    # question = "What are the 4 benefits of OOP?"
-    correct_answer = "Encapsulation, Inheritance, Polymorphism, and Abstraction"
-    inputed_answer = "Inheritance, Encapsulation, abstraction, and lol"
-    prompt = (
-        f"You are a 'high', or 'low' answering computer that grades on similarity not exact accuracy"
-        f"Compare the similarity between the correct answer: '{correct_answer}' "
-        f"and the provided answer to grade: '{inputed_answer}'."
-        f"Response must be either 'high' or 'low' so NO other text"
-    )
-    
-    response = grade_answer(prompt)
+@app.route('/gradeQuiz',methods = ['POST'])
+def grade_quiz():
+    if request.method == 'POST':
+        try:
+            request_data = request.get_json() #Get the Json of the data sent to the flask server
+            result = []
+            for i, item in enumerate(request_data, 1):
+                # question = item['question'] # we don't really need this in this case
+                correct_answer = item['answer']
+                inputed_answer = item['userAnswer']
+                prompt = (
+                    f"You are a 'high', or 'low' answering computer that grades on similarity not exact accuracy so you aren't case sensitive"
+                    f"Compare the similarity between the correct answer: '{correct_answer}' "
+                    f"and the provided answer to grade: '{inputed_answer}'."
+                    f"Response must be either 'high' or 'low' so NO other text"
+                )
+                response = grade_answer(prompt)
+                result.append(response)
+   
 
-    return response
+            print(request_data)
+        
+        except Exception as e:
+            return jsonify({"message": "Something went wrong"})
+
+        return jsonify({"message": result})
+
 
 def grade_answer(prompt):
-    response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}])
+    # response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}])
     
-    return response.choices[0].message.content
+    # return response.choices[0].message.content
+    #These are commented out so we don't make api requests during testing
+    return 'high'
