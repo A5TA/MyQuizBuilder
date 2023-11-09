@@ -10,10 +10,15 @@ interface questionItem {
 }
 
 //This is the data format to be sent to flask server
-interface entireQuizData {
+interface QNAData {
   question: string;
   answer: string;
   userAnswer: string;
+}
+
+interface GradeData {
+  message: string[] | string; // Assuming 'message' is a string
+  // Add other fields if present in the response
 }
 
 @Component({
@@ -26,7 +31,8 @@ export class QuizpageComponent implements OnInit{
   quizData: any;
   questionsAndAnswers: questionItem[] = [];
   inputedAnswer: string[] = [];
-  submitQuizData: entireQuizData[] = [];
+  submitQuizData: QNAData[] = [];
+  gradeData: GradeData | undefined;
   // quizData$: any;
 
   constructor(private quizService: QuizService, private route: ActivatedRoute) {}
@@ -65,7 +71,20 @@ export class QuizpageComponent implements OnInit{
         userAnswer: this.inputedAnswer[i]
       })
     }
-    console.log(this.submitQuizData);
-  }
+    
+    this.quizService.gradeQuiz(this.submitQuizData).subscribe(data => {
+      this.gradeData = data as GradeData;
+      console.log(this.gradeData.message);
+
+      if (this.gradeData.message === "Something went wrong") {
+        console.log("An error has occured when grading the quiz")
+      } else {
+        this.showScore();
+      }
+    });
+    }
   
+    showScore() {
+      console.log("TODO -- Make the score show for each question")
+    }
 }

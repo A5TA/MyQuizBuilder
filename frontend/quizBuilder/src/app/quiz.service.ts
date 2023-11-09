@@ -13,6 +13,12 @@ interface questionItem {
   answer: string;
 }
 
+interface QNAData {
+  question: string;
+  answer: string;
+  userAnswer: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,7 +36,11 @@ export class QuizService {
   createQuiz(quizData: quizSchema) {
     console.log(quizData);
     return this.http.post(`${this.baseURL}/createKey`, quizData)
+  }
 
+  //The quiz data is an array of questions, answers, and user answers
+  gradeQuiz(qnaData: QNAData[]) {
+    return this.http.post(`${this.baseURL}/gradeQuiz`, qnaData)
   }
 
 }
