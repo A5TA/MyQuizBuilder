@@ -1,0 +1,80 @@
+.container {
+    max-width: 800px;  
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+    align-items: center;
+   
+   }
+   
+   h1{
+      text-align: center; 
+      align-items: center;
+      color: black;
+      font-family: 'Times New Roman';
+      font-size: 300%;
+      margin-bottom: 20px;
+   }
+   
+   .flashcard {
+       margin-bottom: 15px;
+       background-color: #fff; 
+       padding: 10px;
+     }
+   
+   mat-card {
+       width: 100%;
+       border: 1px solid #ccc;
+       border-radius: 5px;
+   }
+     
+   .question-input {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       margin-bottom: 15px;
+   }
+     
+   mat-card-title {
+       color: black;
+       font-weight: bold;
+       padding: 10px;
+     }
+     
+   
+     mat-card-content {
+       padding: 15px;
+     }
+   
+     mat-form-field {
+       width: 100%;
+       margin-bottom: 15px;
+     }
+   
+     mat-icon-button {
+       background-color: #e74c3c;
+       color: #fff;
+       border-radius: 50%;
+       cursor: pointer;
+       margin-left: 10px;
+     }
+   
+     mat-icon-button:hover {
+       background-color: #c0392b;
+     }
+   
+     mat-raised-button {
+       width: 100%;
+       margin-bottom: 20px;
+     }
+     
+     mat-raised-button[disabled] {
+       background-color: #ccc;
+       color: #fff;
+       cursor: not-allowed;
+     }
+   
+   button:hover{
+       background-color: #770a83;
+   }
