@@ -1,3 +1,4 @@
+import random
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import openai
@@ -110,4 +111,4 @@ def grade_answer(prompt):
     
     # return response.choices[0].message.content
     #These are commented out so we don't make api requests during testing
-    return 'high'
+    return random.choice(['high', 'low'])
