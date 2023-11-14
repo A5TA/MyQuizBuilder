@@ -7,14 +7,14 @@
     align-items: center;
    
    }
-   
-   h1{
+   h2{
       text-align: center; 
       align-items: center;
       color: black;
       font-family: 'Times New Roman';
       font-size: 300%;
       margin-bottom: 20px;
+      margin-top: 1rem;
    }
    
    .flashcard {
@@ -27,6 +27,12 @@
        width: 100%;
        border: 1px solid #ccc;
        border-radius: 5px;
+       background-color: rgb(247, 238, 227);
+       box-shadow: 5px 5px 10px #888888;
+       
+   }
+   .quiz-container-qustion {
+    padding: 2rem;
    }
      
    .question-input {

@@ -35,6 +35,7 @@ export class QuizpageComponent implements OnInit{
   gradeData: GradeData | undefined;
   testDone: boolean = false;
   isCorrectArray: boolean[] = [];
+  finalScore: number = 0;
   // quizData$: any;
 
   constructor(private quizService: QuizService, private route: ActivatedRoute) {}
@@ -89,13 +90,18 @@ export class QuizpageComponent implements OnInit{
     }
   
     showScore() {
+      this.finalScore = 0;
+      for (let i = 0; i < this.questionsAndAnswers.length; i++) {
+        if (this.gradeData?.message[i] === "high") {
+          this.isCorrectArray[i] = true;
+          this.finalScore++;
+        } else {
+          this.isCorrectArray[i] = false;
+        }    
+      }
+      this.finalScore = (this.finalScore / this.questionsAndAnswers.length) * 100;
+      console.log(this.finalScore);
+
       console.log("TODO -- Make the score show for each question");
-/*
-is`testDONE' make this a condition in the div 
-make a boolean arrray and for each item in the array
-loop through this.gradeData.message and make a new array iscoerrectary[] if high true if low false
-
-*/
-
     }
 }
