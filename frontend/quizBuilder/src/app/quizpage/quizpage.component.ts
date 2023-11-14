@@ -30,9 +30,11 @@ export class QuizpageComponent implements OnInit{
   quizId: number | undefined;
   quizData: any;
   questionsAndAnswers: questionItem[] = [];
-  inputedAnswer: string[] = [];
+  inputedAnswer: string[] = []; //this
   submitQuizData: QNAData[] = [];
   gradeData: GradeData | undefined;
+  testDone: boolean = false;
+  isCorrectArray: boolean[] = [];
   // quizData$: any;
 
   constructor(private quizService: QuizService, private route: ActivatedRoute) {}
@@ -79,12 +81,21 @@ export class QuizpageComponent implements OnInit{
       if (this.gradeData.message === "Something went wrong") {
         console.log("An error has occured when grading the quiz")
       } else {
+        //test done
+        this.testDone = true;
         this.showScore();
       }
     });
     }
   
     showScore() {
-      console.log("TODO -- Make the score show for each question")
+      console.log("TODO -- Make the score show for each question");
+/*
+is`testDONE' make this a condition in the div 
+make a boolean arrray and for each item in the array
+loop through this.gradeData.message and make a new array iscoerrectary[] if high true if low false
+
+*/
+
     }
 }
