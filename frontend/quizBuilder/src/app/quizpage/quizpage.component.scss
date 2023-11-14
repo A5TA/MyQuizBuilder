@@ -1,11 +1,12 @@
-.container {
+.quiz-container {
     max-width: 800px;  
     margin: auto;
     padding: 20px;
-    background-color: white;
+    background-color: rgb(248, 246, 244);
     text-align: center;
     align-items: center;
-   
+    border-radius: 15px;
+    margin-top: 5%;
    }
    h2{
       text-align: center; 
@@ -73,7 +74,8 @@
      mat-raised-button {
        width: 100%;
        margin-bottom: 20px;
-     }
+       text-align: center;
+      }
      
      mat-raised-button[disabled] {
        background-color: #ccc;
