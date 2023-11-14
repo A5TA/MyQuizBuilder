@@ -1,6 +1,7 @@
 <div class="quiz-container">
     <h2>{{ quizData?.name}}</h2>
-    <div *ngFor="let qa of questionsAndAnswers; let i = index">
+    <h3 *ngIf="testDone">Score: {{finalScore}}%</h3>
+    <div *ngFor="let qa of questionsAndAnswers; let i = index" class="quiz-container-qustion">
       <mat-card class="question-card">
         <mat-card-title>Question {{ i + 1 }}</mat-card-title>
         <mat-card-content>
@@ -8,10 +9,11 @@
           <mat-form-field class="answer-field">
             <input matInput placeholder="Your Answer" [(ngModel)]="inputedAnswer[i]" name="answer {{ i + 1}}">
           </mat-form-field>
-          
-          <img mat-card-image height="50px" *ngIf="testDone" src="../../assets/happy.png" alt="happy"/>
-          <img mat-card-image height="50px" *ngIf="testDone" src="../../assets/sad.png" alt="sad"/>
-
+          <img mat-card-image height="50px" *ngIf="testDone && isCorrectArray[i]" src="../../assets/happy.png" alt="happy"/>
+          <img mat-card-image height="50px" *ngIf="testDone && !isCorrectArray[i]" src="../../assets/sad.png" alt="sad"/>       
+          <mat-card *ngIf="testDone">
+            <mat-card-content>Correct Answer: {{questionsAndAnswers[i].answer}}</mat-card-content>
+          </mat-card>
         </mat-card-content>
       </mat-card>
     </div>

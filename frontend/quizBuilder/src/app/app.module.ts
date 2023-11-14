@@ -21,6 +21,7 @@ import { KeyInputDialogComponent } from './key-input-dialog/key-input-dialog.com
 //This is the Backend communication imports
 import { HttpClientModule } from '@angular/common/http';
 import { GotoQuizDialogComponent } from './goto-quiz-dialog/goto-quiz-dialog.component';
+import { AllTheQuizzesPageComponent } from './all-the-quizzes-page/all-the-quizzes-page.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { GotoQuizDialogComponent } from './goto-quiz-dialog/goto-quiz-dialog.com
     QuizpageComponent,
     NotFoundComponent,
     KeyInputDialogComponent,
-    GotoQuizDialogComponent
+    GotoQuizDialogComponent,
+    AllTheQuizzesPageComponent
   ],
   imports: [
     BrowserModule,

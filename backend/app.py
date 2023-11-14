@@ -1,3 +1,4 @@
+import random
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import openai
@@ -75,7 +76,23 @@ def get_key(key):
             connect.close()
             return jsonify({"message": "No quiz found for key: " + str(key)})
 
-
+@app.route('/getAllKeys',methods = ['GET'])
+def get_all_keys(): 
+    if request.method == 'GET':
+        connect = sqlite3.connect('database.db', check_same_thread=False) 
+        connect.row_factory = sqlite3.Row
+        cur = connect.cursor()
+        cur.execute("SELECT rowid, * FROM QUIZ ")
+        data = cur.fetchall()  # Retrieves all the rows is what the fetchall does
+        
+        if data is not None:
+            # Create a dict with the json structure
+            connect.close()
+            quiz_list = [{"id": row["id"], "name": row["name"]} for row in data]
+            return jsonify(quiz_list)  # Return the data as JSON
+        else:
+            connect.close()
+            return jsonify({"message": "No quizes found!"})
 
 @app.route('/gradeQuiz',methods = ['POST'])
 def grade_quiz():
@@ -110,4 +127,4 @@ def grade_answer(prompt):
     
     # return response.choices[0].message.content
     #These are commented out so we don't make api requests during testing
-    return 'high'
+    return random.choice(['high', 'low'])

@@ -43,4 +43,9 @@ export class QuizService {
     return this.http.post(`${this.baseURL}/gradeQuiz`, qnaData)
   }
 
+  //simply returns all the quizes in the database
+  getAllQuizzes() {
+    return this.http.get(`${this.baseURL}/getAllKeys`);
+  }
+
 }
