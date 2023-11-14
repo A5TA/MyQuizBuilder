@@ -84,8 +84,10 @@ export class QuizpageComponent implements OnInit{
         //test done
         this.testDone = true;
         this.showScore();
-      }
-    });
+
+        this.isCorrectArray = [];
+        
+    }});
     }
   
     showScore() {

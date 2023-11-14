@@ -9,8 +9,8 @@
             <input matInput placeholder="Your Answer" [(ngModel)]="inputedAnswer[i]" name="answer {{ i + 1}}">
           </mat-form-field>
           
-          <img mat-card-image height="50px" *ngIf="testDONE" src="../../assets/happy.png" alt="happy"/>
-          <img mat-card-image height="50px" *ngIf="testDONE" src="../../assets/sad.png" alt="sad"/>
+          <img mat-card-image height="50px" *ngIf="testDone" src="../../assets/happy.png" alt="happy"/>
+          <img mat-card-image height="50px" *ngIf="testDone" src="../../assets/sad.png" alt="sad"/>
 
         </mat-card-content>
       </mat-card>
