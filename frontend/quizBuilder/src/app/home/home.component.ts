@@ -38,4 +38,8 @@ export class HomeComponent {
   routeToQuiz() {
     this.router.navigate([`/quiz/${this.quizId}`]);
   }
+
+  routeToAllQuizGallery() {
+    this.router.navigate([`/allquizzes`]);
+  }
 }

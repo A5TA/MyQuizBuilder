@@ -17,8 +17,7 @@ interface QNAData {
 }
 
 interface GradeData {
-  message: string[] | string; // Assuming 'message' is a string
-  // Add other fields if present in the response
+  message: string[] | string;
 }
 
 @Component({
@@ -85,9 +84,6 @@ export class QuizpageComponent implements OnInit{
         //test done
         this.testDone = true;
         this.showScore();
-
-        this.isCorrectArray = [];
-        
     }});
     }
   
@@ -103,7 +99,5 @@ export class QuizpageComponent implements OnInit{
       }
       this.finalScore = (this.finalScore / this.questionsAndAnswers.length) * 100;
       console.log(this.finalScore);
-
-      console.log("TODO -- Make the score show for each question");
     }
 }
