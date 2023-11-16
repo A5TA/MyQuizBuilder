@@ -81,7 +81,7 @@ export class QuizmakerComponent {
     this.router.navigate([`/quiz/${this.quizId}`]);
   }
 
-  validate() {
-    return this.questions.length != 0;
+  validate(formName: any) {
+    return this.questions.length != 0 && formName != ""; //makes sure both a name is present and questions are more than 1
   }
 }

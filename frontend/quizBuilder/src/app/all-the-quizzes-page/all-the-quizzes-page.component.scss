@@ -1,7 +1,10 @@
 .main-card {
   display: flex;
   justify-content: center;
-  margin: 10rem;
+  margin-left: 20rem;
+  margin-right: 20rem;
+  margin-top: 5rem;
+  background-color: rgb(247, 238, 227);
 }
 
 .quiz-card {
@@ -26,7 +29,24 @@
   justify-content: center;
   flex-direction: column;
 }
-
-.mat-card {
+mat-card {
+  background-color: #683ab717;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.575);
+  height: max-content;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  margin-left: 10px;
+  width: 200px;
+}
+
+mat-card-title {
+  overflow: hidden;
+  white-space: nowrap;
 }
