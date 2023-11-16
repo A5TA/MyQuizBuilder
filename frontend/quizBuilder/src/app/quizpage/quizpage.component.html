@@ -1,6 +1,6 @@
 <div class="quiz-container">
     <h2>{{ quizData?.name}}</h2>
-    <h3 *ngIf="testDone">Score: {{finalScore}}%</h3>
+    <h3 *ngIf="testDone">Score: {{finalScore.toFixed(2)}}%</h3>
     <div *ngFor="let qa of questionsAndAnswers; let i = index" class="quiz-container-qustion">
       <mat-card class="question-card">
         <mat-card-title>Question {{ i + 1 }}</mat-card-title>
