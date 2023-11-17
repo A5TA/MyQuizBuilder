@@ -123,8 +123,8 @@ def grade_quiz():
 
 
 def grade_answer(prompt):
-    # response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}])
+    response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": prompt}])
     
-    # return response.choices[0].message.content
+    return response.choices[0].message.content
     #These are commented out so we don't make api requests during testing
-    return random.choice(['high', 'low'])
+    # return random.choice(['high', 'low'])
